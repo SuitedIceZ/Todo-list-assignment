@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import TodoList from './components/TodoList';
 function App() {
 
   const [todoList, setTodoList] = useState(["task 1"]);
@@ -21,6 +21,16 @@ function App() {
     setText("");
 
   }
+
+  const removeTask = (index) => {
+    console.log("removeTask: " + index);
+    
+    let newTodoList = [...todoList];
+
+    newTodoList.splice(index, 1);
+    setTodoList(newTodoList);
+  }
+
   return (
     <div>
       <h1>My First React App</h1>
@@ -30,13 +40,7 @@ function App() {
       </div>
 
       <div>
-        <div>
-          {
-            todoList.map((task, index) => {
-              return <div key={index}>{task}</div>
-            })
-          }
-        </div>
+        <TodoList todoList={todoList} removeTask={removeTask}/>
       </div>
     </div>
   );
